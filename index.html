@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[YOUR NAME] – Portfolio</title>
+<meta name="description" content="Selected work and case studies from [YOUR NAME].">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<style>
+/* ========== 1. TOKENS ========== */
+:root{
+  --cream:#f7f2e9; --ink:#1b1a17; --coral:#ff8a5c; --lavender:#e6a8ee;
+  --mint:#6fcf97; --butter:#ffec7a; --sky:#a9e4ff; --white:#fffdf8;
+  --font-display:'Fraunces',Georgia,serif; --font-body:'DM Sans',system-ui,sans-serif;
+  --radius:28px; --line:2px solid var(--ink);
+}
+/* ========== 2. BASE ========== */
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--cream);color:var(--ink);font:400 1.05rem/1.6 var(--font-body);overflow-x:hidden}
+h1,h2,h3{font-family:var(--font-display);line-height:1.1;font-weight:800;letter-spacing:-.01em}
+h1{font-size:clamp(2.6rem,8vw,5.2rem)} h2{font-size:clamp(2rem,5vw,3.2rem)} h3{font-size:1.5rem}
+a{color:inherit} ul{list-style:none;padding:0}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1120px,100% - 2rem);margin-inline:auto}
+section{padding:3.5rem 0}
+.center{text-align:center}
+.btn{display:inline-block;padding:.8rem 1.6rem;border:var(--line);border-radius:999px;background:var(--ink);color:var(--cream);font-weight:700;text-decoration:none;cursor:pointer;font-family:inherit;font-size:1rem;transition:transform .2s}
+.btn:hover{transform:translateY(-3px)}
+.btn.light{background:var(--white);color:var(--ink)}
+.link{font-weight:700;text-underline-offset:4px}
+svg.doodle{fill:none;stroke:var(--ink);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.sr{position:absolute;left:-9999px}
+/* ========== 3. NAV ========== */
+header{position:sticky;top:0;z-index:50;background:var(--cream);border-bottom:1px solid rgba(27,26,23,.15)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:.8rem 0}
+.logo{font:800 1.5rem var(--font-display);text-decoration:none}
+.nav-links{display:none;gap:1.5rem;align-items:center}
+.nav-links a{text-decoration:none;font-weight:500}
+.nav-links a:hover{text-decoration:underline}
+.menu-btn{background:none;border:var(--line);border-radius:999px;padding:.4rem 1rem;font:700 .95rem var(--font-body);cursor:pointer}
+.nav-links.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--cream);padding:1.5rem;border-bottom:var(--line);align-items:flex-start}
+@media(min-width:800px){.nav-links{display:flex}.menu-btn{display:none}}
+/* ========== 4. HERO ========== */
+.hero{position:relative;padding:3rem 0 2rem;text-align:center;overflow:hidden}
+.hero p.sub{max-width:34rem;margin:1.2rem auto 1.8rem;font-size:1.2rem}
+.cta-row{display:flex;gap:1.5rem;justify-content:center;align-items:center;flex-wrap:wrap}
+.rocket-wrap{position:relative;width:min(300px,70%);margin:2.5rem auto 0}
+.blob{position:absolute;inset:8% 0 0 8%;background:radial-gradient(circle at 30% 30%,#ff8a5c,#b66bff);filter:blur(40px);opacity:.7;border-radius:50%}
+.rocket-wrap svg{position:relative;width:100%;height:auto}
+@media(min-width:900px){.rocket-wrap{position:absolute;right:2%;top:1rem;width:260px;margin:0}}
+.worked{margin-top:3rem;font-size:.95rem}
+.worked ul{display:flex;flex-wrap:wrap;gap:.6rem 2rem;justify-content:center;margin-top:.7rem;font:800 1.15rem var(--font-display);opacity:.75}
+/* ========== 5. BLOCKS & DIVIDERS ========== */
+.block{border:var(--line);border-radius:var(--radius);padding:2rem 1.25rem}
+@media(min-width:700px){.block{padding:3rem}}
+.divider{display:block;width:100%;height:36px;margin:0}
+/* ========== 6. WORK ========== */
+#work .block{background:var(--coral)}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin:1.5rem 0 2rem}
+.chip{padding:.4rem 1.1rem;border:var(--line);border-radius:999px;background:var(--white);font:500 .95rem var(--font-body);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--cream)}
+.grid{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr))}
+.card{border:var(--line);border-radius:22px;padding:1.6rem;display:flex;flex-direction:column;gap:.7rem;box-shadow:5px 5px 0 var(--ink);transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--ink)}
+.card .role{font-weight:700;font-size:.95rem}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.tags span{border:1.5px solid var(--ink);border-radius:999px;padding:.1rem .7rem;font-size:.82rem;background:rgba(255,255,255,.55)}
+.card .link{margin-top:auto}
+.card[hidden]{display:none}
+/* ========== 7. HOW I WORK ========== */
+.how-head{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:2rem}
+.steps{display:grid;gap:1.25rem}
+.step{display:grid;gap:1.5rem;align-items:center}
+.step ul{display:grid;gap:.7rem;margin-top:1rem}
+.step li{display:flex;gap:.7rem;align-items:flex-start}
+.step li svg{flex:none;width:24px;height:24px;margin-top:3px}
+.art{background:var(--white);border:var(--line);border-radius:18px;min-height:170px;display:grid;place-items:center;font-size:4rem}
+@media(min-width:800px){.step{grid-template-columns:1.1fr .9fr}.step:nth-child(even) .art{order:-1}}
+/* ========== 8. TESTIMONIALS ========== */
+.quotes{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));margin-top:2rem}
+.quote{background:var(--white);border:var(--line);border-radius:22px;padding:1.5rem;transition:transform .2s}
+.quote:hover{transform:translateY(-4px)}
+.quote p{margin-bottom:1rem}
+.quote small{display:block;opacity:.75}
+/* ========== 9. FAQ ========== */
+#faq .block{background:var(--butter)}
+.faq-layout{display:grid;gap:2rem;align-items:center}
+@media(min-width:800px){.faq-layout{grid-template-columns:.8fr 1.2fr}}
+.faq{background:var(--white);border:var(--line);border-radius:20px;overflow:hidden}
+.faq-item+.faq-item{border-top:var(--line)}
+.faq button{all:unset;box-sizing:border-box;width:100%;padding:1.1rem 1.3rem;display:flex;justify-content:space-between;gap:1rem;font-weight:700;cursor:pointer}
+.faq button:focus-visible{outline:3px solid var(--ink);outline-offset:-5px}
+.faq button span{transition:transform .2s}
+.faq button[aria-expanded="true"] span{transform:rotate(45deg)}
+.faq .ans{padding:0 1.3rem 1.2rem}
+.faq .ans[hidden]{display:none}
+/* ========== 10. CLOSING + FOOTER ========== */
+#contact .block{background:var(--sky);text-align:center}
+#contact h2{max-width:16ch;margin:0 auto 1.5rem}
+footer{background:var(--ink);color:var(--cream);padding:3rem 0 2rem;margin-top:3.5rem}
+footer .cols{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2rem}
+footer ul{display:flex;flex-wrap:wrap;gap:.6rem 1.5rem}
+footer small{display:block;margin-top:2rem;opacity:.6}
+/* ========== 11. MOTION ========== */
+.fade{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
+.fade.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+  html{scroll-behavior:auto}.fade{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" id="logo"></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">Menu</button>
+    <nav class="nav-links" id="navLinks" aria-label="Main">
+      <a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a>
+      <a class="btn" href="#contact" id="navCta">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <!-- ===== ROCKET ILLUSTRATION (swap this whole block for your own SVG/image) ===== -->
+      <div class="rocket-wrap" aria-hidden="true">
+        <div class="blob"></div>
+        <svg class="doodle" viewBox="0 0 260 260" role="img">
+          <!-- rocket body -->
+          <path d="M60 205 C48 150 82 78 168 40 C190 90 168 160 112 212 C94 214 74 210 60 205Z"/>
+          <path d="M112 212 C128 226 150 232 166 236 C158 220 156 206 160 190"/>
+          <path d="M60 205 C44 200 28 210 20 232 C42 232 56 226 70 214"/>
+          <circle cx="132" cy="102" r="17"/><circle cx="132" cy="102" r="8"/>
+          <!-- flame -->
+          <path d="M60 205 C40 214 28 236 12 252 M70 214 C58 232 52 246 46 256 M50 198 C34 204 18 214 4 222"/>
+          <!-- person riding -->
+          <circle cx="170" cy="52" r="11"/>
+          <path d="M170 63 C176 82 162 92 150 96 M164 74 C182 70 196 56 208 44 M150 96 L130 120 C124 128 118 136 112 146 M150 96 L164 122 C168 132 160 142 150 150"/>
+          <!-- sparkles -->
+          <path d="M214 120 v16 M206 128 h16 M30 90 v12 M24 96 h12 M228 30 l4 8 8 4 -8 4 -4 8 -4 -8 -8 -4 8 -4z"/>
+        </svg>
+      </div>
+      <!-- ===== END ROCKET ILLUSTRATION ===== -->
+
+      <h1 id="heroTitle"></h1>
+      <p class="sub" id="heroSub"></p>
+      <div class="cta-row">
+        <a class="btn" id="heroCta" href="#work"></a>
+        <a class="link" id="heroLink" href="#about"></a>
+      </div>
+      <div class="worked">
+        <span id="workedLabel"></span>
+        <ul id="workedList"></ul>
+      </div>
+    </div>
+  </section>
+
+  <svg class="divider" viewBox="0 0 1200 36" preserveAspectRatio="none" aria-hidden="true"><path d="M0 18 Q50 0 100 18 T200 18 T300 18 T400 18 T500 18 T600 18 T700 18 T800 18 T900 18 T1000 18 T1100 18 T1200 18 V36 H0Z" fill="var(--coral)" stroke="var(--ink)" stroke-width="2"/></svg>
+
+  <section id="work" style="padding-top:0">
+    <div class="wrap">
+      <div class="block">
+        <h2 class="center" id="workTitle"></h2>
+        <div class="chips" id="chips" role="group" aria-label="Filter projects by category"></div>
+        <div class="grid" id="projects"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="how-head">
+        <h2 id="howTitle"></h2>
+        <svg class="doodle" width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6 l5 16 17 2 -13 10 5 17 -14 -9 -14 9 5 -17 -13 -10 17 -2z"/></svg>
+      </div>
+      <div class="steps" id="steps"></div>
+    </div>
+  </section>
+
+  <section id="love">
+    <div class="wrap center">
+      <h2 id="loveTitle"></h2>
+      <div class="quotes" id="quotes" style="text-align:left"></div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="block">
+        <div class="faq-layout">
+          <div>
+            <h2 id="faqTitle"></h2>
+            <svg class="doodle" width="120" height="100" viewBox="0 0 120 100" aria-hidden="true"><circle cx="60" cy="34" r="22"/><path d="M52 28 q8 -10 16 0 q0 8 -8 10 M60 50 v2 M60 58 C58 76 48 88 36 94 M60 58 C64 76 76 88 88 94"/></svg>
+          </div>
+          <div class="faq" id="faqList"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="block">
+        <svg class="doodle" width="90" height="70" viewBox="0 0 90 70" aria-hidden="true"><path d="M8 50 C30 10 60 70 82 20 M70 14 l12 6 -8 10"/></svg>
+        <h2 id="ctaTitle"></h2>
+        <a class="btn" id="ctaBtn" href="#"></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div><div class="logo" id="footLogo"></div><p id="footNote"></p></div>
+      <ul id="footLinks" aria-label="Contact and social links"></ul>
+    </div>
+    <small id="copy"></small>
+  </div>
+</footer>
+
+<script>
+/* =====================================================================
+   EDIT YOUR CONTENT HERE – everything on the page is rendered from this
+   object. Replace every [BRACKETED] item. Colors: coral, lavender, mint,
+   butter, sky. Project "category" must match one of the filter names.
+   ===================================================================== */
+const CONTENT = {
+  name: "[YOUR NAME]",
+  role: "[YOUR ROLE, e.g. Product Owner]",
+  tagline: "Turning messy problems into products people love",
+  subheading: "[YOUR ROLE] with [X] years of experience shipping work that moves real numbers.",
+  heroCta: { label: "See my work", href: "#work" },
+  heroLink: { label: "About me", href: "#about" },
+  workedWithLabel: "Worked with",
+  workedWith: ["[COMPANY 1]", "[COMPANY 2]", "[COMPANY 3]", "[COMPANY 4]"],
+  navCta: { label: "Get in touch", href: "#contact" },
+
+  workTitle: "Selected work",
+  categories: ["All", "Product", "Design", "Strategy"],
+  projects: [
+    { title: "[PROJECT 1 TITLE]", outcome: "Cut onboarding time by [X]% for [COMPANY].", role: "[YOUR ROLE]", tags: ["[TAG]", "[TAG]"], category: "Product", color: "lavender", href: "[CASE STUDY LINK]" },
+    { title: "[PROJECT 2 TITLE]", outcome: "Redesigned the [FEATURE] flow, lifting conversion [X]%.", role: "[YOUR ROLE]", tags: ["[TAG]", "[TAG]"], category: "Design", color: "mint", href: "[CASE STUDY LINK]" },
+    { title: "[PROJECT 3 TITLE]", outcome: "Defined a 12-month roadmap adopted across [N] teams.", role: "[YOUR ROLE]", tags: ["[TAG]", "[TAG]"], category: "Strategy", color: "butter", href: "[CASE STUDY LINK]" },
+    { title: "[PROJECT 4 TITLE]", outcome: "Launched [PRODUCT] to [N] users in [N] months.", role: "[YOUR ROLE]", tags: ["[TAG]", "[TAG]"], category: "Product", color: "sky", href: "[CASE STUDY LINK]" },
+    { title: "[PROJECT 5 TITLE]", outcome: "Built a design system used by [N] designers.", role: "[YOUR ROLE]", tags: ["[TAG]", "[TAG]"], category: "Design", color: "lavender", href: "[CASE STUDY LINK]" }
+  ],
+
+  howTitle: "How I work",
+  steps: [
+    { title: "Listen first", color: "lavender", emoji: "👂", points: ["Interview users and stakeholders", "Map the real problem, not the request", "Agree on what success looks like"] },
+    { title: "Shape the plan", color: "mint", emoji: "🗺️", points: ["Prioritise by impact and effort", "Write clear, testable requirements", "Keep the roadmap honest and visible"] },
+    { title: "Ship in small steps", color: "butter", emoji: "🚀", points: ["Release early and learn fast", "Work side by side with design and engineering", "Share progress every week"] },
+    { title: "Measure and improve", color: "sky", emoji: "📈", points: ["Track the metrics that matter", "Review results with the team", "Turn lessons into the next bet"] }
+  ],
+
+  loveTitle: "Wall of love",
+  testimonials: [
+    { quote: "[TESTIMONIAL 1: a sentence or two about working with you.]", who: "[NAME]", what: "[TITLE, COMPANY]" },
+    { quote: "[TESTIMONIAL 2: a specific result you helped achieve.]", who: "[NAME]", what: "[TITLE, COMPANY]" },
+    { quote: "[TESTIMONIAL 3: what it was like to collaborate.]", who: "[NAME]", what: "[TITLE, COMPANY]" },
+    { quote: "[TESTIMONIAL 4: why they would hire you again.]", who: "[NAME]", what: "[TITLE, COMPANY]" }
+  ],
+
+  faqTitle: "Frequently asked questions",
+  faqs: [
+    { q: "What kind of projects do you take on?", a: "[Describe your ideal projects, industries and team sizes.]" },
+    { q: "How do we start working together?", a: "[Explain your first steps, e.g. a 30-minute intro call.]" },
+    { q: "Are you available for new work?", a: "[Add your availability and preferred engagement types.]" },
+    { q: "Where are you based?", a: "[CITY, COUNTRY], working with teams in [TIME ZONES]." }
+  ],
+
+  ctaTitle: "Have a project in mind? Let's talk.",
+  ctaButton: { label: "Say hello", href: "mailto:[YOUR EMAIL]" },
+
+  footerNote: "[YOUR ROLE] based in [CITY, COUNTRY].",
+  contactLinks: [
+    { label: "[YOUR EMAIL]", href: "mailto:[YOUR EMAIL]" },
+    { label: "LinkedIn", href: "[LINKEDIN URL]" },
+    { label: "GitHub", href: "[GITHUB URL]" }
+  ]
+};
+/* ============================ END OF CONTENT ============================ */
+
+/* ---------- helpers ---------- */
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const col = c => `var(--${c})`;
+const ARROW = '<svg class="doodle" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12 C9 10 14 14 20 12 M15 6 l6 6 -6 6"/></svg>';
+
+/* ---------- render: static text ---------- */
+const C = CONTENT;
+document.title = C.name + " – Portfolio";
+$("logo").textContent = C.name; $("footLogo").textContent = C.name;
+$("heroTitle").textContent = C.tagline; $("heroSub").textContent = C.subheading;
+$("heroCta").textContent = C.heroCta.label; $("heroCta").href = C.heroCta.href;
+$("heroLink").textContent = C.heroLink.label; $("heroLink").href = C.heroLink.href;
+$("navCta").textContent = C.navCta.label; $("navCta").href = C.navCta.href;
+$("workedLabel").textContent = C.workedWithLabel;
+$("workedList").innerHTML = C.workedWith.map(n => `<li>${esc(n)}</li>`).join("");
+$("workTitle").textContent = C.workTitle; $("howTitle").textContent = C.howTitle;
+$("loveTitle").textContent = C.loveTitle; $("faqTitle").textContent = C.faqTitle;
+$("ctaTitle").textContent = C.ctaTitle;
+$("ctaBtn").textContent = C.ctaButton.label; $("ctaBtn").href = C.ctaButton.href;
+$("footNote").textContent = C.footerNote;
+$("footLinks").innerHTML = C.contactLinks.map(l => `<li><a href="${esc(l.href)}">${esc(l.label)}</a></li>`).join("");
+$("copy").textContent = "© " + new Date().getFullYear() + " " + C.name;
+
+/* ---------- render + filter: projects ---------- */
+$("projects").innerHTML = C.projects.map(p => `
+  <article class="card fade" data-cat="${esc(p.category)}" style="background:${col(p.color)}">
+    <h3>${esc(p.title)}</h3><p>${esc(p.outcome)}</p>
+    <p class="role">${esc(p.role)}</p>
+    <div class="tags">${p.tags.map(t => `<span>${esc(t)}</span>`).join("")}</div>
+    <a class="link" href="${esc(p.href)}">View case study</a>
+  </article>`).join("");
+$("chips").innerHTML = C.categories.map((c, i) => `<button class="chip" type="button" aria-pressed="${i === 0}" data-f="${esc(c)}">${esc(c)}</button>`).join("");
+$("chips").addEventListener("click", e => {
+  const b = e.target.closest(".chip"); if (!b) return;
+  $("chips").querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", x === b));
+  const f = b.dataset.f;
+  document.querySelectorAll("#projects .card").forEach(c => { c.hidden = !(f === C.categories[0] || c.dataset.cat === f); });
+});
+
+/* ---------- render: how I work ---------- */
+$("steps").innerHTML = C.steps.map(s => `
+  <div class="block step fade" style="background:${col(s.color)}">
+    <div><h3>${esc(s.title)}</h3><ul>${s.points.map(p => `<li>${ARROW}<span>${esc(p)}</span></li>`).join("")}</ul></div>
+    <div class="art" aria-hidden="true">${s.emoji}</div>
+  </div>`).join("");
+
+/* ---------- render: testimonials ---------- */
+$("quotes").innerHTML = C.testimonials.map(t => `
+  <figure class="quote fade"><blockquote><p>“${esc(t.quote)}”</p></blockquote>
+  <figcaption><strong>${esc(t.who)}</strong><small>${esc(t.what)}</small></figcaption></figure>`).join("");
+
+/* ---------- render + behaviour: FAQ accordion ---------- */
+$("faqList").innerHTML = C.faqs.map((f, i) => `
+  <div class="faq-item">
+    <h3 style="font:inherit"><button type="button" aria-expanded="false" aria-controls="ans${i}" id="q${i}">${esc(f.q)}<span aria-hidden="true">+</span></button></h3>
+    <div class="ans" id="ans${i}" role="region" aria-labelledby="q${i}" hidden>${esc(f.a)}</div>
+  </div>`).join("");
+$("faqList").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  const open = b.getAttribute("aria-expanded") === "true";
+  b.setAttribute("aria-expanded", !open);
+  $(b.getAttribute("aria-controls")).hidden = open;
+});
+
+/* ---------- mobile menu ---------- */
+const mb = $("menuBtn"), nl = $("navLinks");
+mb.addEventListener("click", () => { const o = nl.classList.toggle("open"); mb.setAttribute("aria-expanded", o); });
+nl.addEventListener("click", e => { if (e.target.tagName === "A") { nl.classList.remove("open"); mb.setAttribute("aria-expanded", "false"); } });
+
+/* ---------- fade-in on scroll ---------- */
+const targets = document.querySelectorAll(".fade");
+if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } }), { threshold: .12 });
+  targets.forEach(t => io.observe(t));
+} else targets.forEach(t => t.classList.add("in"));
+</script>
+</body>
+</html>
